@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+
+.login-main-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.signup-main-wrapper{
+  display: flex;
+  justify-content: center;
+}
+
+.password-main-wrapper{
+  display: flex;
+  justify-content: center;
+}
