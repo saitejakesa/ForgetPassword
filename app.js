@@ -22,6 +22,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+<<<<<<< HEAD
+=======
+//app.set("view engine","ejs");
+>>>>>>> 74d3515 (Recomitting with edited code)
 
 
 // catch 404 and forward to error handler
