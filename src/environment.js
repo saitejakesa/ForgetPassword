@@ -1,5 +1,5 @@
 const env = {
-    apiurl: "http://localhost:5000"
+    apiurl: "http://localhost:8000"
 }
 
 export default env

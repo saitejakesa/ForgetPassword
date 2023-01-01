@@ -33,9 +33,10 @@ function Login() {
       }, 3000);
     }
   };
+  
   return (
     <>
-    <div></div>
+    <div>
       <div className="login-wrapper">
         <h1>Welcome to App</h1>
         <p>Login to Continue</p>
@@ -88,6 +89,7 @@ function Login() {
           <></>
         )}
       </div>
+    </div>
     </>
   );
 }

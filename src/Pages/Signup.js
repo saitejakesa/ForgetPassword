@@ -35,7 +35,7 @@ const Signup = () => {
     <>
       <div className="signup-wrapper">
         <h1>Welcome to Sign Up</h1>
-        <p>Sign Up to Login to your Account</p>
+        <p>Sign Up first to Login to your Account</p>
       </div>
       <div className="signup-main-wrapper">
         <Form>
