@@ -12,7 +12,12 @@ function Resetpassword() {
     let [message, setMessage] = useState("");
     let navigate = useNavigate();
 
-
+    let res = axios.post(`${env.apiurl}/users/tokenvalidate`,{
+      token
+    })
+    if(res.statusCode===200){
+      
+    }
     let handleSubmit = async () => {
         setToggle(true);
         let res = await axios.post(`${env.apiurl}/users/reset-password`, {
@@ -40,13 +45,7 @@ function Resetpassword() {
     }
   return (
     <div>
-     {/* <form action="">
-     <label for="password" >Password</label>
-     <input type="password" name="password" id="password"/><br>
-     <label for="confirm password" >Confirm Password</label>
-     <input type="password" name="confirm-password" id="confirm-password"/><br>
-     <input type="submit" value="submit"/>
-     </form> */}
+     
       <div className="login-wrapper">
         <h1>Welcome to App</h1>
         <p>Login to Continue</p>

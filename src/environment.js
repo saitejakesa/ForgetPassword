@@ -1,5 +1,5 @@
 const env = {
-    apiurl: "http://localhost:8000"
+    apiurl: "https://forgetpassword-renderdeployment.onrender.com/"
 }
 
 export default env
