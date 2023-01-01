@@ -85,8 +85,7 @@ router.post("/forgetpassword",async(req,res)=>{
         {email:oldUser.email,id:oldUser.id},
         secret,
         {expiresIn:'5m'})
-      const link=`http://localhost:5000/users/reset-password/${oldUser.id}/${token}`;
-      console.log(link)
+      const link=`http://localhost:3000/users/validate/${oldUser.id}/${token}`;
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -96,10 +95,10 @@ router.post("/forgetpassword",async(req,res)=>{
       });
       
       var mailOptions = {
-        from: 'youremail@gmail.com',
+        from: 'dummydeveloper030896@gmail.com',
         to: email,
         subject: 'Reset Password Link',
-        text: link
+        html: link
       };
       
       transporter.sendMail(mailOptions, function(error, info){
@@ -122,15 +121,6 @@ router.post("/forgetpassword",async(req,res)=>{
         message:"Forget Password not successful"
     })
     }
-
-    // if(oldUser){
-    //   return res.send("User Not exists")
-    // }
-    // const secret = JWT_SECRET+oldUser.password;
-    // const token=jwt.sign({email:oldUser.email, id:oldUser.id},secret,{
-    //   expiresIn:"5m"
-    // })
-    // const link=`http://localhost:5000/resetpassword/${oldUser.id}/${token}`;
   }
   catch(error){
     console.log(error)
@@ -138,47 +128,40 @@ router.post("/forgetpassword",async(req,res)=>{
   }
 })
 
-router.get("/reset-password/:id/:token",async(req,res)=>{
+router.post("/reset-password",async(req,res)=>{
   mongoose.connect(dbUrl)
-  const {id,token}=req.params
-  try{
+  const {id,Resetpassword,token,confirmpassword}=req.body;
   const oldUser=await usersModel.findOne({_id:id});
-  if(oldUser){
+  try{
+    if(oldUser){ 
     const secret=secretKeyforget+oldUser.password;
     const verify = jwt.verify(token,secret)
-    res.render("index",{email:verify.email})
-  }
-  else{
-    res.send({
-      statusCode:400,
-      message:"Password Reset not successful"
-  })
-  }
-  }
-  catch(error){
-      console.log(error)
-      res.send({statusCode:400,message:"Internal Server Error",error})
-  }
-})
-
-router.post("/reset-password/:id/:token",async(req,res)=>{
-  mongoose.connect(dbUrl)
-  const {id,token}=req.params
-  const {password}=req.body;
-  try{
-  const oldUser=await usersModel.findOne({_id:id});
-  if(oldUser){
-    const secret=secretKeyforget+oldUser.password;
-    const verify = jwt.verify(token,secret)
-    let hashedpassword= await hashPassword(req.body.password)
-      req.body.password=hashedpassword
-      await usersModel.updateOne({_id:id},
-      {$set: {password:hashedpassword,},})
-
-    res.send({
-      statusCode:200,
-      message:"Password updated succesfully"
-    })
+    const compresult=Resetpassword===confirmpassword
+    if(compresult)
+      {  
+    let hashedpassword= await hashPassword(req.body.Resetpassword)
+    req.body.password=hashedpassword
+    let passchange=await usersModel.updateOne({_id:id},
+    {$set: {password:hashedpassword,},})
+    if(passchange.modifiedCount==1){
+      res.send({
+          statusCode:200,
+          message:"Password updated succesfully"
+        })
+      }
+      else{
+        res.send({
+          statusCode:400,
+          message:"Password not updated"
+        })
+      }
+    }
+    else{
+      res.send({
+        statusCode:400,
+        message:"Reset Password field and confirm password field are not similar"
+      })
+    } 
   }
   else{
     res.send({
