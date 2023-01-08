@@ -85,7 +85,7 @@ router.post("/forgetpassword",async(req,res)=>{
         {email:oldUser.email,id:oldUser.id},
         secret,
         {expiresIn:'5m'})
-      const link=`https://flourishing-fox-b9b3da.netlify.app/${oldUser.id}/${token}`;
+      const link=`https://bespoke-torrone-033b0d.netlify.app/users/validate/${oldUser.id}/${token}`;
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
