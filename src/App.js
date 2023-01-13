@@ -14,8 +14,9 @@ function App() {
         <Route path='/' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/home' element={<Homepage/>}/>
+        <Route path='/reset' element={<Resetpassword/>}/>
         <Route path='/forgetpassword' element={<Forgetpassword/>}/>
-        <Route exact path='/users/validate/:id/:token' element={<Resetpassword/>}/>
+        
       </Routes>
       </BrowserRouter>
       

@@ -14,6 +14,7 @@ const Signup = () => {
 
   let handleLogin = async () => {
     setToggle(true);
+    console.log(env.apiurl)
     let res = await axios.post(`${env.apiurl}/users/signup`, {
       name,
       email,

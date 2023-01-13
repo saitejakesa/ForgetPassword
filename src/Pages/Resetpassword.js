@@ -1,29 +1,25 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import {  useNavigate, useParams } from 'react-router-dom'
+import {  useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Form, Button, FormGroup, Input, Label, Spinner } from 'reactstrap'
 import env from '../environment'
 
 function Resetpassword() {
-    let {id,token}=useParams()
+  let a=new URLSearchParams(useLocation().search);
+  console.log(a.get('id'));
+
     let [confirmpassword, SetConfirmPassword] = useState("");
     let [Resetpassword, setResetPassword] = useState("");
     let [toggle, setToggle] = useState(false);
     let [message, setMessage] = useState("");
     let navigate = useNavigate();
 
-    let res = axios.post(`${env.apiurl}/users/tokenvalidate`,{
-      token
-    })
-    if(res.statusCode===200){
-      
-    }
     let handleSubmit = async () => {
         setToggle(true);
         let res = await axios.post(`${env.apiurl}/users/reset-password`, {
           Resetpassword,
-          id,
-          token,
+          // id,
+          // token,
           confirmpassword
         });
 
