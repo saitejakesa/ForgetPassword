@@ -85,7 +85,7 @@ router.post("/forgetpassword",async(req,res)=>{
         {email:oldUser.email,id:oldUser.id},
         secret,
         {expiresIn:'5m'})
-      const link=`https://bespoke-torrone-033b0d.netlify.app/users/validate/${oldUser.id}/${token}`;
+      const link=`http://localhost:3000/reset/${oldUser.id}/${token}`;
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -104,16 +104,18 @@ router.post("/forgetpassword",async(req,res)=>{
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
           console.log(error);
+          res.send({
+            statusCode:200,
+            message:"Link not sent error occured",
+          })
         } else {
-          console.log('Email sent: ' + info.response);
+          res.send({
+            statusCode:200,
+            message:"Link sent to the mail succesfully",
+          })
         }
       });
-      res.send({
-        statusCode:200,
-        message:"Link sent",
-        token,
-        link
-      })
+      
     }
     else{
       res.send({
