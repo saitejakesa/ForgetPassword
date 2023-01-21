@@ -85,7 +85,7 @@ router.post("/forgetpassword",async(req,res)=>{
         {email:oldUser.email,id:oldUser.id},
         secret,
         {expiresIn:'5m'})
-      const link=`http://localhost:3000/reset/${oldUser.id}/${token}`;
+      const link=`https://forget-password-fc45sukh4-saitejakesa.vercel.app/reset/${oldUser.id}/${token}`;
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
