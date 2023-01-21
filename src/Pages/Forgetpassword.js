@@ -18,6 +18,10 @@ function Forgetpassword() {
       if (res.data.statusCode === 200) {
         setToggle(false);
         sessionStorage.setItem("token", res.data.token);
+        setMessage(res.data.message);
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
         navigate("/");
       } else {
         setToggle(false);
@@ -30,8 +34,8 @@ function Forgetpassword() {
     return (
       <div className='ForgetPassword_wrapper'>
         <div className="password-wrapper">
-          <h1>Welcome to App</h1>
-          <p>Login to Continue</p>
+          <h1>Welcome to Forget Password Page</h1>
+          <p>You can send the mail to reset password</p>
         </div>
         <div className="password-main-wrapper">
           <Form>

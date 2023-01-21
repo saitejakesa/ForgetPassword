@@ -38,7 +38,7 @@ function Login() {
     <>
     <div>
       <div className="login-wrapper">
-        <h1>Welcome to App</h1>
+        <h1>Welcome to Login </h1>
         <p>Login to Continue</p>
       </div>
       <div className="login-main-wrapper">

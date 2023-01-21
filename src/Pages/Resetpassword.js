@@ -1,12 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import {  useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Form, Button, FormGroup, Input, Label, Spinner } from 'reactstrap'
 import env from '../environment'
 
 function Resetpassword() {
-  let a=new URLSearchParams(useLocation().search);
-  console.log(a.get('id'));
+  let {id,token}=useParams();
 
     let [confirmpassword, SetConfirmPassword] = useState("");
     let [Resetpassword, setResetPassword] = useState("");
@@ -18,8 +17,8 @@ function Resetpassword() {
         setToggle(true);
         let res = await axios.post(`${env.apiurl}/users/reset-password`, {
           Resetpassword,
-          // id,
-          // token,
+          id,
+          token,
           confirmpassword
         });
 
@@ -43,8 +42,8 @@ function Resetpassword() {
     <div>
      
       <div className="login-wrapper">
-        <h1>Welcome to App</h1>
-        <p>Login to Continue</p>
+        <h1>Welcome to Reset Password Page</h1>
+        <p>The password will be changed</p>
       </div>
       <div className="login-main-wrapper">
         <Form>
